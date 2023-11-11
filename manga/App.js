@@ -1,20 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { useWindowDimensions } from 'react-native';
+import { Provider, useSelector } from 'react-redux';
+import store from './redux/store';
+import { TabView, SceneMap } from 'react-native-tab-view';
+import { PopularList } from './components/PopularList';
+import { Search } from './components/Search';
+
+
+const renderScene = SceneMap({
+  popular: PopularList,
+  search: Search,
+});
 
 export default function App() {
+  const layout = useWindowDimensions();
+
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    { key: 'popular', title: 'Popular' },
+    { key: 'search', title: 'Search' },
+  ]);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={ store }>
+      <TabView
+        navigationState={{ index, routes }}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        initialLayout={{ width: layout.width }}
+      />
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
