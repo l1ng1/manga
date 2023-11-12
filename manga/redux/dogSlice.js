@@ -30,5 +30,5 @@ export default counterSlice.reducer;
 // похожие
 // {self.api}/api/titles/{title}/similar/
 
-// поиск
+// поиск search_title
 // {self.api}/api/search/?query={title}&count={count}

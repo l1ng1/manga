@@ -1,34 +1,31 @@
-import * as React from 'react';
-import { useWindowDimensions } from 'react-native';
-import { Provider, useSelector } from 'react-redux';
-import store from './redux/store';
-import { TabView, SceneMap } from 'react-native-tab-view';
-import { PopularList } from './components/PopularList';
-import { Search } from './components/Search';
+// App.js
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import PopularScreen from './components/PopularScreen';
+import SearchScreen from './components/SearchScreen';
 
+const Tab = createMaterialTopTabNavigator();
+const SearchStack = createStackNavigator();
 
-const renderScene = SceneMap({
-  popular: PopularList,
-  search: Search,
-});
-
-export default function App() {
-  const layout = useWindowDimensions();
-
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    { key: 'popular', title: 'Popular' },
-    { key: 'search', title: 'Search' },
-  ]);
-
+function SearchStackScreen() {
   return (
-    <Provider store={ store }>
-      <TabView
-        navigationState={{ index, routes }}
-        renderScene={renderScene}
-        onIndexChange={setIndex}
-        initialLayout={{ width: layout.width }}
-      />
-    </Provider>
+    <SearchStack.Navigator>
+      <SearchStack.Screen name="Поиск Вашей Любимой Манги" component={SearchScreen} />
+    </SearchStack.Navigator>
   );
 }
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Популярное" component={PopularScreen} />
+        <Tab.Screen name="Поиск" component={SearchStackScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
