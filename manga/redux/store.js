@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
+import mangaSlice from './mangaSlice';
 
 const store = configureStore({
     reducer: {
-        // dog: dogSlice
+        manga: mangaSlice
     }
 });
 
