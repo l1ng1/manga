@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPopularMangaList } from '../redux/mangaSlice';
+import PopularManga from './PopularComp';
 
 export default function PopularScreen() {
     const state = useSelector((state) => state);
@@ -13,10 +14,11 @@ export default function PopularScreen() {
 
     }, []); // Пустой массив зависимостей гарантирует, что это действие выполняется только один раз при загрузке компонента.
 
-    ;
+    console.log(state.manga.popularManga.content);
     return (
         <View style={styles.container}>
           <Text style={styles.text}>Популярное</Text>
+          <PopularManga data={state.manga.popularManga.content}></PopularManga>
         </View>
     );
 }

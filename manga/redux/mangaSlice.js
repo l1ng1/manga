@@ -69,7 +69,7 @@ const mangaSlice = createSlice({
                 console.log(action.payload)
                 console.log(JSON.parse(action.payload.external_data))
                 state.popularManga = JSON.parse(action.payload.external_data);
-                
+                console.log('STATE:'+state)
             } else {
                 console.log('Error');
             }
