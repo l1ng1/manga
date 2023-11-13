@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         fontWeight: 'bold',
         fontSize: 18, // Уменьшим размер шрифта
-        color: 'blue', // Цвет текста
+        color: '#4682B4', // Цвет текста
         textAlign: 'center', // Выравнивание текста по центру
     },
     genresContainer: {
