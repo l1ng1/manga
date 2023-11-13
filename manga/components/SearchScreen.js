@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { searchManga } from '../redux/mangaSlice'; 
+// import { searchManga } from '../redux/mangaSlice'; 
 
 export default function SearchScreen({ navigation }) {
     // текст с инпута
@@ -10,7 +10,7 @@ export default function SearchScreen({ navigation }) {
     const dispatch = useDispatch();
     // Вызов функции поиска с текстом поиска
     const handleSearch = () => {
-      dispatch(searchManga(searchText)); 
+    //   dispatch(searchManga(searchText)); 
     };
 
     return (
