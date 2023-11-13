@@ -75,20 +75,22 @@ export const fetchDog = createAsyncThunk('dog/fetchDog', async (url) => {
         body: JSON.stringify(post_data),
     });
     const data = await response.json();
-    console.log(data)
+    // console.log(data)
     return data;
 });
 
 const counterSlice = createSlice({
-    name: 'dog',
+    name: 'manga',
     initialState: { image: '' },
     extraReducers: (builder) => {
         builder.addCase(fetchDog.fulfilled, (state, action) => {
             if (action.payload) {
                 state.image = action.payload.message;
-                console.log(action.payload);
-                console.log(state.image);
-                console.log(JSON.parse(action.payload.external_data))
+                // console.log(action.payload);
+                // console.log(state.image);
+                // console.log(JSON.parse(action.payload.external_data))
+                state.popularManga = JSON.parse(action.payload.external_data);
+                return;
             } else {
                 console.log('Error')
             }
