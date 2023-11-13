@@ -49,7 +49,7 @@ function App() {
                       preventDefault(); 
                     }}
                 >
-                      <Tab.Screen name="Популярное" component={PopularScreen} />
+                      <Tab.Screen name="Новинки" component={PopularScreen} />
                       <Tab.Screen name="Поиск" component={SearchStackScreen} />
                   </Tab.Navigator>
             </NavigationContainer>
