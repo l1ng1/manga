@@ -9,8 +9,7 @@ export default function PopularScreen() {
 
     const dispatch = useDispatch();
     dispatch(fetchDog());
-
-    // console.log(state.manga.popularManga);
+    console.log(state.manga.popularManga);
     return (
         <View style={styles.container}>
           <Text style={styles.text}>Популярное</Text>

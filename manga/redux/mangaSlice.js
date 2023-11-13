@@ -88,9 +88,9 @@ const counterSlice = createSlice({
                 state.image = action.payload.message;
                 // console.log(action.payload);
                 // console.log(state.image);
-                // console.log(JSON.parse(action.payload.external_data))
+                console.log(JSON.parse(action.payload.external_data))
                 state.popularManga = JSON.parse(action.payload.external_data);
-                return;
+                
             } else {
                 console.log('Error')
             }
