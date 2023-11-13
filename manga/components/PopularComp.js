@@ -53,6 +53,8 @@ const PopularManga = (props) => {
     );
 }
 
+
+
 const styles = StyleSheet.create({
     list: {
         flex:1,
