@@ -1,98 +1,92 @@
 import React from 'react';
 import { Image } from 'react-native';
 import { View, Text, StyleSheet } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
 import { FlatList } from 'react-native';
 import { fetchDog } from '../redux/mangaSlice';
 import { useEffect } from 'react';
 
-
-const Geners =({item})=>{
-    // console.log(item.genres)
-    let list = item.genres;
-    console.log(list)
-    return(
-        <View style={styles.row}>
-        <Text>Жанр-</Text>
-        <FlatList
-            style={styles.list}
-            data={list}
-            renderItem={({item})=>
-                <View>
-                    <Text>{item.name}</Text>
-                </View>}
-            >
-        </FlatList>
-        </View>
-    ) 
-    
+const Geners = ({ item }) => {
+  let list = item.genres;
+  return (
+    <View style={styles.genresContainer}>
+      <Text style={styles.genresTitle}>Жанры:</Text>
+      <FlatList
+        style={styles.genresList}
+        data={list}
+        renderItem={({ item }) => (
+          <View>
+            <Text style={styles.genreItem}>{item.name}</Text>
+          </View>
+        )}
+      />
+    </View>
+  )
 }
 
 const PopularManga = (props) => {
-    // const state = useSelector((state) => state);
-    // const dispatch = useDispatch();
-    
-    // useEffect(() => {
-    //     // Вызов действия при загрузке компонента
-    //     dispatch(fetchDog());
-    // }, []);
-    // console.log(state);
-    console.log(props);
-    return (
-        <View style={styles.list}>
-          <FlatList
-          data={props.data}
-          renderItem={({item})=>
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={props.data}
+        renderItem={({ item }) => (
           <View style={styles.box}>
-            <Image resizeMode='contain' source={{ uri:"https://remanga.org" + item.img.high }} style={styles.coverImage}></Image>
-            <Text>Название - {item.main_name}</Text>
-              
-            <Geners item={item}></Geners>
-          </View>}>
-
-          </FlatList>
-        </View>
-    );
+            <Image resizeMode='contain' source={{ uri: "https://remanga.org" + item.img.low }} style={styles.coverImage} />
+            <Text style={styles.mangaName}>{item.main_name}</Text>
+            <Geners item={item} />
+          </View>
+        )}
+        numColumns={5}
+        contentContainerStyle={styles.listContainer}
+      />
+    </View>
+  );
 }
 
-
-
 const styles = StyleSheet.create({
-    list: {
-        flex:1,
-        flexDirection:'row'
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        // backgroundColor: '#fff', // Фон контейнера
     },
-    box:{
-        flex:1,
-        margin:10,
-        border:'1px black solid',
-        padding:20,
-        borderRadius:9,
-        width:'50%',
-        margin:'auto',
-        marginBottom:'15px',
-        fontSize:'24px',
-        textAlign:'center'
+    listContainer: {
+        width: 1200,
     },
-
-    text: {
-        color: 'white',
+    box: {
+        width: '18%',
+        margin: 10,
+        borderWidth: 1,
+        borderColor: 'black',
+        padding: 20,
+        borderRadius: 9,
+        marginBottom: 15,
+        fontSize: 24,
         textAlign: 'center',
+        backgroundColor: '#f9f9f9', // Фон для каждого элемента
+    },
+    coverImage: {
+        width: '100%',
+        height: 200,
+    },
+    mangaName: {
+        marginTop: 10,
+        fontWeight: 'bold',
+        fontSize: 18, // Уменьшим размер шрифта
+        color: 'blue', // Цвет текста
+        textAlign: 'center', // Выравнивание текста по центру
+    },
+    genresContainer: {
+        marginTop: 10,
+    },
+    genresTitle: {
+        fontSize: 16,
         fontWeight: 'bold',
     },
-    row:{
-        display:'flex',
-        flexDirection:'row',
-        width:'90%',
-        justifyContent:'space-around'
+    genresList: {
+        marginTop: 5,
     },
-    coverImage:{
-        width:'100%',
-        height:'500px'
-    }
+    genreItem: {
+        fontSize: 14, // Уменьшим размер шрифта жанров
+    },
 });
-
-
-
 
 export default PopularManga;

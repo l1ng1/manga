@@ -11,7 +11,7 @@ const Tab = createMaterialTopTabNavigator();
 const SearchStack = createStackNavigator();
 
 const tabBarOptions = {
-    labelStyle: { fontSize: 16, fontWeight: 'bold', color: '#fff'},
+    labelStyle: { fontSize: 16, fontWeight: 'bold',},
     tabStyle: ({ route, focused }) => ({
         borderWidth: 1,
         borderColor: focused ? '#B0C4DE' : 'transparent',
@@ -28,11 +28,7 @@ const tabBarOptions = {
 
 function SearchStackScreen() {
     return (
-        <SearchStack.Navigator
-            screenOptions={{
-                cardStyle: { backgroundColor: '#4682B4', textAlign: 'center' } 
-            }}
-        >
+        <SearchStack.Navigator>
             <SearchStack.Screen name="Поиск Вашей Любимой Манги" component={SearchScreen} />
         </SearchStack.Navigator>
     );

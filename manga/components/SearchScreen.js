@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: '#B0C4DE', 
+        // backgroundColor: '#B0C4DE', 
     },
     header: {
         flexDirection: 'row',
@@ -56,11 +56,9 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         marginRight: 10,
-        borderWidth: 1,
-        borderColor: '#7280a8',
+        borderWidth: 2,
         borderRadius: 10,
         padding: 10,
-        color: 'white', 
         backgroundColor: '#4682B4', 
     },
     button: {
@@ -69,7 +67,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     buttonText: {
-        color: 'white',
         textAlign: 'center',
         fontWeight: 'bold',
     },

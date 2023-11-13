@@ -17,7 +17,7 @@ export default function PopularScreen() {
     console.log(state.manga.popularManga.content);
     return (
         <View style={styles.container}>
-          <Text style={styles.text}>Популярное</Text>
+          <Text style={styles.text}>Горячие новинки!</Text>
           <PopularManga data={state.manga.popularManga.content}></PopularManga>
         </View>
     );
@@ -28,10 +28,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: '#B0C4DE',
+        // backgroundColor: '#B0C4DE',
     },
     text: {
-        color: 'white',
+        fontSize: 25,
         textAlign: 'center',
         fontWeight: 'bold',
     },

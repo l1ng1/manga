@@ -35,7 +35,7 @@ export const fetchPopularMangaList = createAsyncThunk('manga/fetchManga', async 
 
 export const searchManga = createAsyncThunk('manga/searchManga', async (text) => {
     const post_data = {
-        'url': `https://api.remanga.org/api/search?query=${text}&count=10`
+        'url': "https://api.remanga.org/api/search?query=" + text + "&count=10"
     }
     // console.log('startSearch');
     // console.log(JSON.stringify(post_data))
