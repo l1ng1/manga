@@ -81,7 +81,7 @@ export const fetchDog = createAsyncThunk('dog/fetchDog', async (url) => {
 
 const counterSlice = createSlice({
     name: 'manga',
-    initialState: { image: '' },
+    initialState: { popularManga: [] },
     extraReducers: (builder) => {
         builder.addCase(fetchDog.fulfilled, (state, action) => {
             if (action.payload) {
@@ -90,7 +90,7 @@ const counterSlice = createSlice({
                 // console.log(state.image);
                 console.log(JSON.parse(action.payload.external_data))
                 state.popularManga = JSON.parse(action.payload.external_data);
-                
+                console.log('STATE:'+state)
             } else {
                 console.log('Error')
             }
