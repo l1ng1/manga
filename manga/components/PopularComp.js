@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-native';
 import { View, Text, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { FlatList } from 'react-native';
@@ -43,6 +44,7 @@ const PopularManga = (props) => {
           data={props.data}
           renderItem={({item})=>
           <View style={styles.box}>
+            <Image resizeMode='contain' source={{ uri:"https://remanga.org" + item.img.high }} style={styles.coverImage}></Image>
             <Text>Название - {item.main_name}</Text>
               
             <Geners item={item}></Geners>
@@ -64,10 +66,11 @@ const styles = StyleSheet.create({
         border:'1px black solid',
         padding:20,
         borderRadius:9,
-        width:'90%',
+        width:'50%',
         margin:'auto',
         marginBottom:'15px',
-        fontSize:'24px'
+        fontSize:'24px',
+        textAlign:'center'
     },
 
     text: {
@@ -80,6 +83,10 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         width:'90%',
         justifyContent:'space-around'
+    },
+    coverImage:{
+        width:'100%',
+        height:'500px'
     }
 });
 
