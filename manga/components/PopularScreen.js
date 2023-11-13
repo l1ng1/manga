@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchDog } from '../redux/mangaSlice';
+import { fetchPopularMangaList } from '../redux/mangaSlice';
 
 export default function PopularScreen() {
     const state = useSelector((state) => state);
@@ -9,10 +9,11 @@ export default function PopularScreen() {
 
     useEffect(() => {
         // Вызов действия при загрузке компонента
-        dispatch(fetchDog());
+        dispatch(fetchPopularMangaList());
+
     }, []); // Пустой массив зависимостей гарантирует, что это действие выполняется только один раз при загрузке компонента.
 
-    console.log(state.manga.popularManga);
+    ;
     return (
         <View style={styles.container}>
           <Text style={styles.text}>Популярное</Text>

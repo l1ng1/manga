@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { useDispatch } from 'react-redux';
-// import { searchManga } from '../redux/mangaSlice'; 
+import { useDispatch, useSelector } from 'react-redux';
+import { searchManga } from '../redux/mangaSlice';
+import { clearSearchResults } from '../redux/mangaSlice'; // Добавьте этот импорт
 
 export default function SearchScreen({ navigation }) {
-    // текст с инпута
     const [searchText, setSearchText] = useState('');
-    // Диспатч для отслеживания функции со слайса
+    const searchResults = useSelector((state) => state.manga.searchResults); // Измените находку состояния
     const dispatch = useDispatch();
-    // Вызов функции поиска с текстом поиска
+
+    useEffect(() => {
+        console.log(searchResults);
+    }, [searchResults]); 
+
     const handleSearch = () => {
-    //   dispatch(searchManga(searchText)); 
+        console.log(searchText);
+        dispatch(clearSearchResults()); // Очистите результаты поиска перед новым поиском
+        dispatch(searchManga(searchText));
     };
+
 
     return (
         <View style={styles.container}>
