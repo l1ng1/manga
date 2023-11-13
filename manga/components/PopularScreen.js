@@ -6,6 +6,10 @@ import { fetchDog } from '../redux/mangaSlice';
 export default function PopularScreen() {
     const state = useSelector((state) => state);
     
+
+    const dispatch = useDispatch();
+    dispatch(fetchDog());
+
     // console.log(state.manga.popularManga);
     return (
         <View style={styles.container}>
