@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPopularMangaList } from '../redux/mangaSlice';
+import { fetchDog } from '../redux/mangaSlice';
 
 export default function PopularScreen() {
     const state = useSelector((state) => state);
-
+    
     const dispatch = useDispatch();
 
-    dispatch(fetchPopularMangaList())
-
+    dispatch(fetchDog())
+    console.log(state.manga.popularListOfManga);
     return (
         <View style={styles.container}>
           <Text style={styles.text}>Популярное</Text>
