@@ -5,7 +5,7 @@ import { fetchPopularMangaList } from '../redux/mangaSlice';
 import PopularManga from './PopularComp';
 
 export default function PopularScreen({navigation}) {
-    console.log(navigation)
+    // console.log(navigation)
     const state = useSelector((state) => state);
     const dispatch = useDispatch();
 

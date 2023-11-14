@@ -37,12 +37,9 @@ const PopularManga = ({ data, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center', // Center the list verticallyS
-    // width: '100%',
   },
   listContainer: {
-    flexGrow: 1, // Allow the list to take up the entire screen
+    flexGrow: 1,
     width: '100%',
   },
   box: {

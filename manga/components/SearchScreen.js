@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchManga } from '../redux/mangaSlice';
+import { searchManga } from '../redux/mangaSlice'; 
 import { clearSearchResults } from '../redux/mangaSlice'; // Добавьте этот импорт
 
 export default function SearchScreen({ navigation }) {
@@ -15,7 +15,8 @@ export default function SearchScreen({ navigation }) {
 
     const handleSearch = () => {
         console.log(searchText);
-        dispatch(clearSearchResults()); // Очистите результаты поиска перед новым поиском
+        // Очистите результаты поиска перед новым поиском
+        dispatch(clearSearchResults()); 
         dispatch(searchManga(searchText));
     };
 
