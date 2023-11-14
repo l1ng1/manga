@@ -4,7 +4,7 @@ const Geners = ({ item }) => {
     let list = item.genres;
     return (
       <View style={styles.genresContainer}>
-        <Text style={styles.genresTitle}>Жанры:</Text>
+        <Text style={styles.genresTitle}>Теги:</Text>
         <FlatList
           style={styles.genresList}
           data={list}

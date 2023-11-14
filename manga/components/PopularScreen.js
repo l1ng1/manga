@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPopularMangaList } from '../redux/mangaSlice';
 import PopularManga from './PopularComp';
@@ -18,22 +18,14 @@ export default function PopularScreen({navigation}) {
     console.log(state.manga.popularManga.content);
     return (
         <View style={styles.container}>
-          <Text style={styles.text}>Горячие новинки!</Text>
           <PopularManga data={state.manga.popularManga.content}  navigation={navigation}></PopularManga>
         </View>
     );
 }
 
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        // backgroundColor: '#B0C4DE',
-    },
-    text: {
-        fontSize: 25,
-        textAlign: 'center',
-        fontWeight: 'bold',
     },
 });
