@@ -6,7 +6,7 @@ import { Provider, useSelector } from 'react-redux';
 import store from './redux/store';
 import PopularScreen from './components/PopularScreen';
 import SearchScreen from './components/SearchScreen';
-
+import CurrentManga from './components/CurrentManga';
 const Tab = createMaterialTopTabNavigator();
 const SearchStack = createStackNavigator();
 
@@ -47,6 +47,7 @@ function App() {
                 >
                       <Tab.Screen name="Новинки" component={PopularScreen} />
                       <Tab.Screen name="Поиск" component={SearchStackScreen} />
+                      <Tab.Screen name="Читать" component={CurrentManga} />
                   </Tab.Navigator>
             </NavigationContainer>
         </Provider>

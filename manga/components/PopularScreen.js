@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchPopularMangaList } from '../redux/mangaSlice';
 import PopularManga from './PopularComp';
 
-export default function PopularScreen() {
+export default function PopularScreen({navigation}) {
+    console.log(navigation)
     const state = useSelector((state) => state);
     const dispatch = useDispatch();
 
@@ -18,7 +19,7 @@ export default function PopularScreen() {
     return (
         <View style={styles.container}>
           <Text style={styles.text}>Горячие новинки!</Text>
-          <PopularManga data={state.manga.popularManga.content}></PopularManga>
+          <PopularManga data={state.manga.popularManga.content}  navigation={navigation}></PopularManga>
         </View>
     );
 }

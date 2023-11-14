@@ -4,38 +4,44 @@ import { View, Text, StyleSheet } from 'react-native';
 import { FlatList } from 'react-native';
 import { fetchDog } from '../redux/mangaSlice';
 import { useEffect } from 'react';
+import { TouchableOpacity } from 'react-native';
+import Geners from './GenersComp';
 
-const Geners = ({ item }) => {
-  let list = item.genres;
-  return (
-    <View style={styles.genresContainer}>
-      <Text style={styles.genresTitle}>Жанры:</Text>
-      <FlatList
-        style={styles.genresList}
-        data={list}
-        renderItem={({ item }) => (
-          <View>
-            <Text style={styles.genreItem}>{item.name}</Text>
-          </View>
-        )}
-      />
-    </View>
-  )
-}
 
-const PopularManga = (props) => {
+// const Geners = ({ item }) => {
+//   let list = item.genres;
+//   return (
+//     <View style={styles.genresContainer}>
+//       <Text style={styles.genresTitle}>Жанры:</Text>
+//       <FlatList
+//         style={styles.genresList}
+//         data={list}
+//         renderItem={({ item }) => (
+//           <View>
+//             <Text style={styles.genreItem}>{item.name}</Text>
+//           </View>
+//         )}
+//       />
+//     </View>
+//   )
+// }
+
+const PopularManga = ({ data, navigation }) => {
+  console.log(navigation)
   return (
     <View style={styles.container}>
       <FlatList
-        data={props.data}
+        data={data}
         renderItem={({ item }) => (
-          <View style={styles.box}>
-            <Image resizeMode='contain' source={{ uri: "https://remanga.org" + item.img.low }} style={styles.coverImage} />
-                          <Text style={styles.mangaName}>{item.main_name}</Text>
+          <TouchableOpacity onPress={() => { navigation.navigate('Читать',item)}}>
+            <View style={styles.box}>
+              <Image resizeMode='contain' source={{ uri: "https://remanga.org" + item.img.low }} style={styles.coverImage} />
+              <Text style={styles.mangaName}>{item.main_name}</Text>
               <Geners item={item} />
-                      </View>
+            </View>
+          </TouchableOpacity>
         )}
-numColumns={5}
+        // numColumns={3}
         contentContainerStyle={styles.listContainer}
       />
     </View>
@@ -52,7 +58,7 @@ const styles = StyleSheet.create({
         width: '80%',
     },
     box: {
-        width: '18%',
+        width: '90%',
         margin: 10,
         borderWidth: 1,
         borderColor: 'black', 
