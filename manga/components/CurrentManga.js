@@ -1,49 +1,30 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Image, Pressable } from 'react-native';
 import { View, Text, StyleSheet } from 'react-native';
 import { FlatList } from 'react-native';
 import { fetchDog } from '../redux/mangaSlice';
 import { useEffect } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { useState } from 'react';
 import Geners from './GenersComp';
 
-
-// const Geners = ({ item }) => {
-//   let list = item.genres;
-//   return (
-//     <View style={styles.genresContainer}>
-//       <Text style={styles.genresTitle}>Жанры:</Text>
-//       <FlatList
-//         style={styles.genresList}
-//         data={list}
-//         renderItem={({ item }) => (
-//           <View>
-//             <Text style={styles.genreItem}>{item.name}</Text>
-//           </View>
-//         )}
-//       />
-//     </View>
-//   )
-// }
-
-const PopularManga = ({ data, navigation }) => {
-  console.log(navigation)
+const CurrentManga = ({route,navigation}) => {
+    console.log(route);
+    let len = route.params != undefined;
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={data}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => { navigation.navigate('Читать',item)}}>
-            <View style={styles.box}>
-              <Image resizeMode='contain' source={{ uri: "https://remanga.org" + item.img.low }} style={styles.coverImage} />
-              <Text style={styles.mangaName}>{item.main_name}</Text>
-              <Geners item={item} />
-            </View>
-          </TouchableOpacity>
-        )}
-        // numColumns={3}
-        contentContainerStyle={styles.listContainer}
-      />
+    <View>
+        {len ?  
+        <View>
+                <Image resizeMode='contain' source={{ uri: "https://remanga.org" + route.params.img.low }} style={styles.coverImage} />
+                <Text style={styles.mangaName}>{route.params.main_name}</Text>
+                <Geners item={route.params} />
+                <Pressable onPress={()=>{navigation.goBack()}}><Text>Назад</Text></Pressable>
+        </View>
+        
+        :
+        
+        <Text>Не найденно</Text>}
+       
+       
     </View>
   );
 }
@@ -58,7 +39,7 @@ const styles = StyleSheet.create({
         width: '80%',
     },
     box: {
-        width: '90%',
+        width: '18%',
         margin: 10,
         borderWidth: 1,
         borderColor: 'black',
@@ -95,4 +76,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PopularManga;
+export default CurrentManga;
