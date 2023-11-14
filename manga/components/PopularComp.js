@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         // backgroundColor: '#fff', // Фон контейнера
     },
     listContainer: {
-        width: 1200,
+        width: '80%',
     },
     box: {
         width: '18%',
