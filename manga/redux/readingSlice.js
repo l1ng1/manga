@@ -59,7 +59,7 @@ const readingSlice = createSlice({
         builder.addCase(getTomes.fulfilled, (state, action) => {
             if (action.payload) {
                 console.log('getTomes');
-                state.currentToms = JSON.parse(action.payload.external_data).content;
+                state.currentToms = action.payload.external_data.content;
             } else {
                 console.log('Error');
             }
@@ -68,7 +68,7 @@ const readingSlice = createSlice({
         builder.addCase(getChapters.fulfilled, (state, action) => {
             if (action.payload) {
                 console.log('getChapters');
-                state.currentChapters = JSON.parse(action.payload.external_data).content;
+                state.currentChapters = action.payload.external_data.content;
             } else {
                 console.log('Error');
             }
