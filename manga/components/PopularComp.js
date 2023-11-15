@@ -1,6 +1,5 @@
 import React from 'react';
-import { Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { FlatList } from 'react-native';
+import { Image, View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import Geners from './GenersComp';
 
 

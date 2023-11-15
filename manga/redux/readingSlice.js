@@ -5,7 +5,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 // для поиска глав
 // https://api.remanga.org/api/titles/chapters/ + tom.id + /
 
-export const getTomes = createAsyncThunk('manga/searchManga', async (mangaID) => {
+export const getTomes = createAsyncThunk('read/getTomes', async (mangaID) => {
     const post_data = {
         'url': "https://api.remanga.org/api/titles/chapters/?branch_id=" + mangaID
     }
@@ -19,11 +19,10 @@ export const getTomes = createAsyncThunk('manga/searchManga', async (mangaID) =>
         body: JSON.stringify(post_data),
     });
     const data = await response.json();
-    console.log(data);
     return data;
 });
 
-export const getChapters = createAsyncThunk('manga/searchManga', async (tomID) => {
+export const getChapters = createAsyncThunk('read/getChapters', async (tomID) => {
     const post_data = {
         'url': "https://api.remanga.org/api/titles/chapters/" + tomID + "/"
     }
@@ -37,12 +36,11 @@ export const getChapters = createAsyncThunk('manga/searchManga', async (tomID) =
         body: JSON.stringify(post_data),
     });
     const data = await response.json();
-    console.log(data);
     return data;
 });
 
 const readingSlice = createSlice({
-    name: 'manga',
+    name: 'read',
     initialState: { 
         currentToms: [],
         currentChapters: [],
@@ -59,9 +57,7 @@ const readingSlice = createSlice({
         builder.addCase(getTomes.fulfilled, (state, action) => {
             if (action.payload) {
                 console.log('getTomes');
-                console.log(action.payload);
-                state.currentToms = JSON.parse(action.payload);
-                console.log(state.currentToms);
+                state.currentToms = JSON.parse(action.payload.external_data).content;
             } else {
                 console.log('Error');
             }
@@ -70,9 +66,7 @@ const readingSlice = createSlice({
         builder.addCase(getChapters.fulfilled, (state, action) => {
             if (action.payload) {
                 console.log('getChapters');
-                console.log(action.payload);
-                state.currentChapters = JSON.parse(action.payload);
-                console.log(state.currentChapters);
+                state.currentChapters = JSON.parse(action.payload.external_data).content;
             } else {
                 console.log('Error');
             }

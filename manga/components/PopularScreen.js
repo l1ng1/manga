@@ -15,7 +15,7 @@ export default function PopularScreen({navigation}) {
 
     }, []); // Пустой массив зависимостей гарантирует, что это действие выполняется только один раз при загрузке компонента.
 
-    console.log(state.manga.popularManga.content);
+    // console.log(state.manga.popularManga.content);
     return (
         <View style={styles.container}>
           <PopularManga data={state.manga.popularManga.content}  navigation={navigation}></PopularManga>
