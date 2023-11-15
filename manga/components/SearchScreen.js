@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import { useDispatch, useSelector } from 'react-redux';
 import { searchManga } from '../redux/mangaSlice'; 
 import { clearSearchResults } from '../redux/mangaSlice'; // Добавьте этот импорт
-
+import PopularManga from './PopularComp';
 export default function SearchScreen({ navigation }) {
     const [searchText, setSearchText] = useState('');
     const searchResults = useSelector((state) => state.manga.searchResults); // Измените находку состояния
@@ -37,7 +37,7 @@ export default function SearchScreen({ navigation }) {
             <View style={styles.contentContainer}>
               
                 <Text>Контейнер для отображения поика!</Text>
-
+                <PopularManga data={searchResults} navigation={navigation} ></PopularManga>
             </View>
         </View>
     );

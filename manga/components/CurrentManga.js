@@ -27,7 +27,7 @@ const CurrentManga = ({ route, navigation }) => {
             <>
                 <View style={styles.info}>
                 <View style={styles.imageContainer}>
-                    <Image source={{ uri: 'https://remanga.org/' + manga.img.mid }} style={styles.coverImage} />
+                    <Image source={{ uri: 'https://remanga.org/' + manga.img.mid }} style={styles.coverImage}  />
                 </View>
                 <View style={styles.descriptionContainer}>
                     <Text style={styles.title}>{manga.rus_name}</Text>
@@ -35,7 +35,7 @@ const CurrentManga = ({ route, navigation }) => {
                     <Text style={styles.description}>{manga.en_name}</Text>
                     <Text style={styles.description}>{manga.main_name}</Text>
                     <Text style={styles.description}>Year: {manga.issue_year}</Text>
-                    <Text style={styles.description}>Genres: {manga.genres.map((genre) => genre.name).join(', ')}</Text>
+                    {/* <Text style={styles.description}>Genres: {manga.genres.map((genre) => genre.name).join(', ')}</Text> */}
                     <Text style={styles.description}>Total Views: {manga.total_views}</Text>
                     <Text style={styles.description}>Total Votes: {manga.total_votes}</Text>
                     <Text style={styles.description}>Chapters: {manga.count_chapters}</Text>
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
         width: '80%',
         height: '80%',
         borderRadius: 8,
+        resizeMode: 'contain',
     },
     title: {
         fontSize: 24,
