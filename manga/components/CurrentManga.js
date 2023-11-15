@@ -27,7 +27,7 @@ const CurrentManga = ({ route, navigation }) => {
             <>
                 <View style={styles.info}>
                 <View style={styles.imageContainer}>
-                    <Image source={{ uri: 'https://remanga.org/' + manga.img.mid }} style={styles.coverImage} />
+                    <Image source={{ uri: 'https://remanga.org/' + manga.img.mid }} style={styles.coverImage}  />
                 </View>
                 <View style={styles.descriptionContainer}>
                     <Text style={styles.title}>{manga.rus_name}</Text>
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
         width: '80%',
         height: '80%',
         borderRadius: 8,
+        resizeMode: 'contain',
     },
     title: {
         fontSize: 24,
