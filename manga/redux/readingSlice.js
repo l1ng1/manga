@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+//для поиска
+// "https://api.remanga.org/api/search?query=наруто&count=10"
 // для поиска томов
 // https://api.remanga.org/api/titles/chapters/?branch_id= + manga.id
 // для поиска глав

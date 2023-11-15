@@ -10,7 +10,7 @@ export default function SearchScreen({ navigation }) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // console.log(searchResults);
+        console.log(searchResults);
     }, [searchResults]); 
 
     const handleSearch = () => {
