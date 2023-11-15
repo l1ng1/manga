@@ -35,7 +35,7 @@ const CurrentManga = ({ route, navigation }) => {
                     <Text style={styles.description}>{manga.en_name}</Text>
                     <Text style={styles.description}>{manga.main_name}</Text>
                     <Text style={styles.description}>Year: {manga.issue_year}</Text>
-                    <Text style={styles.description}>Genres: {manga.genres.map((genre) => genre.name).join(', ')}</Text>
+                    {/* <Text style={styles.description}>Genres: {manga.genres.map((genre) => genre.name).join(', ')}</Text> */}
                     <Text style={styles.description}>Total Views: {manga.total_views}</Text>
                     <Text style={styles.description}>Total Votes: {manga.total_votes}</Text>
                     <Text style={styles.description}>Chapters: {manga.count_chapters}</Text>
