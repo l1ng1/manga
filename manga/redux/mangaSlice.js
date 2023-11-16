@@ -4,7 +4,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchPopularMangaList = createAsyncThunk('manga/fetchManga', async () => {
     const post_data = {
+        // 'url': `https://api.remanga.org/api/titles/`
         'url': `https://api.remanga.org/api/titles/`
+        
     }
     const response = await fetch('https://lapse.site/t_api/manga.php', {
         method: 'POST',

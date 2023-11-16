@@ -29,6 +29,7 @@ export default function SearchScreen({ navigation }) {
                   placeholder="Поиск..."
                   onChangeText={setSearchText}
                   value={searchText}
+                  
                 />
                 <TouchableOpacity style={styles.button} onPress={handleSearch}>
                     <Text style={styles.buttonText}>Поиск</Text>
