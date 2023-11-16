@@ -41,11 +41,39 @@ export const getChapters = createAsyncThunk('read/getChapters', async (tomID) =>
     return data;
 });
 
+
+export const getImg = createAsyncThunk('read/getImg',async(tom)=>{
+    
+    const url = tom.pages[0][0].link;
+   
+    let url2 = url.replace('https://img5.reimg.org/','https://reimg2.org');
+    console.log(url2);
+    
+    const post_data = {
+        'url':url2
+    }
+
+    console.log('SUCSEC')
+    
+    const response = await fetch('https://lapse.site/t_api/manga.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: 'bearer '
+        },
+        body: JSON.stringify(post_data),
+    });
+    const data = await response.json();
+    return data;
+
+})
+
 const readingSlice = createSlice({
     name: 'read',
     initialState: { 
         currentToms: [],
         currentChapters: [],
+        currentImg:[],
     },
     reducers: {
         clearCurrentToms: (state) => {
@@ -73,6 +101,17 @@ const readingSlice = createSlice({
                 console.log('Error');
             }
         });
+
+        builder.addCase(getImg.fulfilled, (state, action) => {
+            if (action.payload) {
+                console.log('getImg');
+                console.log(action.payload);
+                state.currentImg = 'lol';
+            } else {
+                console.log('Error');
+            }
+        });
+
     }
 });
 

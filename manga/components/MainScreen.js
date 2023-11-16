@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import PopularScreen from './PopularScreen';
 import SearchScreen from './SearchScreen';
 import CurrentManga from './CurrentManga';
-
+import MangaRead from './MangaRead';
 const Tab = createMaterialTopTabNavigator();
 const SearchStack = createStackNavigator();
 const NewItemsStack = createStackNavigator();
@@ -30,6 +30,7 @@ function SearchStackScreen() {
         <SearchStack.Navigator>
             <SearchStack.Screen name="Поиск Вашей Любимой Манги" component={SearchScreen} />
             <SearchStack.Screen name="Читать" component={CurrentManga}   options={{ headerTitleAlign: 'right' }}/>
+            <SearchStack.Screen name="chapter" component={MangaRead} />
         </SearchStack.Navigator>
     );
 }
@@ -39,6 +40,7 @@ function NewItemsStackScreen() {
         <NewItemsStack.Navigator>
             <NewItemsStack.Screen name="Горячие новинки!" component={PopularScreen} />
             <NewItemsStack.Screen name="Читать" component={CurrentManga} options={{ headerTitleAlign: 'right' }} />
+            <SearchStack.Screen name="chapter" component={MangaRead} />
         </NewItemsStack.Navigator>
     );
 }

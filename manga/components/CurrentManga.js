@@ -46,7 +46,7 @@ const CurrentManga = ({ route, navigation }) => {
                 <Text style={styles.buttonText}>Chapters</Text>
                 </TouchableOpacity>
 
-                {chaptersVisible && <ChapterList />} {/* Отображение глав только если видимость установлена в true */}
+                {chaptersVisible && <ChapterList navigation={navigation} chapter={chapter} />} {/* Отображение глав только если видимость установлена в true */}
             </>
             ) : (
             <Text>Не найденно</Text>

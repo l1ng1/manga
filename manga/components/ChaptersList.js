@@ -3,12 +3,13 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { getChapters, getTomes } from '../redux/readingSlice';
 
-const ChapterList = () => {
+const ChapterList = ({navigation,chapter}) => {
     const currentToms = useSelector((state) => state.read.currentToms);
     const dispatch = useDispatch();
 
     useEffect(() => {
         console.log(currentToms);
+        console.log(chapter);
     }, [currentToms]);
 
     const handleGetChapters = () => {
@@ -24,6 +25,7 @@ const ChapterList = () => {
                     style={styles.chapterButton}
                     onPress={() => {
                         dispatch(getChapters(tom.id));
+                        navigation.navigate('chapter',currentToms);
                     }}
                 >
                     <Text>
