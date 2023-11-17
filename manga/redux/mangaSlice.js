@@ -98,7 +98,8 @@ const mangaSlice = createSlice({
             if (action.payload) {
                 console.log('similarManga');
                 console.log(action.payload);
-                state.similarManga = action.payload.external_data.content;
+                if(!action.payload.external_data) state.similarManga = [];
+                else state.similarManga = action.payload.external_data.content;
                 console.log(state.similarManga);
             } else {
                 console.log('Error');

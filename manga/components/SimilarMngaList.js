@@ -7,7 +7,7 @@ const SimilarMangaList = ({ navigation }) => {
     const similarManga = useSelector((state) => state.manga.similarManga);
     
     const renderItem = ({ item }) => (
-      <TouchableOpacity onPress={() => navigation.navigate('Читать', item)}>
+      <TouchableOpacity onPress={() => navigation.navigate('Читать', item.title)}>
         <View style={{ margin: 10 }}>
           <Image
             source={{ uri: 'https://remanga.org/' + item.title.img.low }}

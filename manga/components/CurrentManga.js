@@ -9,7 +9,6 @@ import SimilarMangaList from './SimilarMngaList';
 
 const CurrentManga = ({ route, navigation }) => {
     const [chaptersVisible, setChaptersVisible] = useState(false);
-    const [pageNumber, setPageNumber] = useState(1);
     let isMangaReceived = route.params !== undefined;
     const manga = route.params;
     const chapter = useSelector((state) => state.read.currentChapters);
@@ -64,7 +63,7 @@ const CurrentManga = ({ route, navigation }) => {
                 {chaptersVisible && <ChapterList navigation={navigation} chapter={chapter} mangaId={manga.id} />}
 
                 <View style={styles.similarMangaContainer}>
-                    <SimilarMangaList navigation={navigation} />
+                    {similarManga.length > 0 && <SimilarMangaList navigation={navigation} />}
                 </View>
             </>
             ) : (
@@ -75,12 +74,12 @@ const CurrentManga = ({ route, navigation }) => {
     );
 };
 
-
 const styles = StyleSheet.create({
     scrollContainer: {
         flexGrow: 1,
     },
     container: {
+        flex: 1,
         flexDirection: 'column',
         padding: 16,
         width: '100%',
@@ -88,28 +87,31 @@ const styles = StyleSheet.create({
     info: {
         flexDirection: 'row',
         width: '100%',
-        height: '60%'
+        height: '60%',
+        alignItems: 'flex-start', 
     },
     imageContainer: {
         flex: 4,
         paddingRight: 16,
-        width: '50%'
+        width: '50%',
     },
     descriptionContainer: {
         flex: 6,
     },
     coverImage: {
-        width: '80%',
-        height: '80%',
+        width: '100%', // Чтобы картинка занимала 100% ширины родительского контейнера
+        height: '100%', // Чтобы картинка занимала 100% высоты родительского контейнера
         borderRadius: 8,
         resizeMode: 'contain',
     },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
+        color: '#4682B4', // Голубой цвет
     },
     secondaryTitle: {
         fontSize: 20,
+        color: '#4682B4', // Голубой цвет
     },
     description: {
         fontSize: 16,
@@ -128,5 +130,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
 });
+  
 
 export default CurrentManga;
