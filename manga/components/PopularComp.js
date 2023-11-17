@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { Image, View, Text, StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import Geners from './GenersComp';
 import { similarManga, clearSimilarManga } from '../redux/mangaSlice';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,20 +12,20 @@ const PopularManga = ({ data, navigation }) => {
     // Очищаем результаты поиска перед новым поиском
     dispatch(clearSimilarManga()); 
     dispatch(similarManga(mangaName));
-};
+  };
 
   return (
     <View style={styles.container}>
-      <FlatList
+    <FlatList
         data={data}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => {
-            let mangaName = item.en_name.toLowerCase();
-            mangaName = mangaName.split(' ').join('-');
-            console.log(mangaName)
-            navigation.navigate('Читать', item);
-            handleSearch(mangaName);
-            }}>
+          let mangaName = item.en_name.toLowerCase();
+          mangaName = mangaName.split(' ').join('-');
+          console.log(mangaName)
+          navigation.navigate('Читать', item);
+          handleSearch(mangaName);
+        }}>
             <View style={styles.box}>
               <View style={styles.imageContainer}>
                 <Image
@@ -43,7 +43,7 @@ const PopularManga = ({ data, navigation }) => {
             </View>
           </TouchableOpacity>
         )}
-        contentContainerStyle={styles.listContainer}
+            contentContainerStyle={styles.listContainer}
       />
     </View>
   );

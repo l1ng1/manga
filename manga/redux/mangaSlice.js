@@ -64,8 +64,6 @@ const mangaSlice = createSlice({
         popularManga: [],
         searchResults: [],
         similarManga: [],
-        currentToms: [],
-        currentChapters: [],
     },
     reducers: {
         clearSearchResults: (state) => {
@@ -89,8 +87,8 @@ const mangaSlice = createSlice({
             if (action.payload) {
                 console.log('searchMangaрмтбитб');
                 console.log(action.payload.external_data);
-                state.searchResults = action.payload.external_data;
-                // console.log(state.searchResults);
+                state.searchResults = action.payload.external_data.content;
+                console.log(state.searchResults);
             } else {
                 console.log('Error');
             }
@@ -100,8 +98,8 @@ const mangaSlice = createSlice({
             if (action.payload) {
                 console.log('similarManga');
                 console.log(action.payload);
-                // state.similarManga = action.payload.external_data.content;
-                // console.log(state.searchResults);
+                state.similarManga = action.payload.external_data.content;
+                console.log(state.similarManga);
             } else {
                 console.log('Error');
             }

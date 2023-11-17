@@ -3,6 +3,7 @@ import { Image, View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'rea
 import { useSelector, useDispatch } from 'react-redux';
 import { getChapters, getTomes, getElseTomes } from '../redux/readingSlice';
 import ChapterList from './ChaptersList';
+import SimilarMangaList from './SimilarMngaList';
 
 
 
@@ -18,7 +19,9 @@ const CurrentManga = ({ route, navigation }) => {
     useEffect(() => {
         console.log(chapter);
     }, [chapter]);
+
     useEffect(() => {
+        
         console.log(similarManga);
     }, [chapter]);
     
@@ -53,12 +56,16 @@ const CurrentManga = ({ route, navigation }) => {
                 <TouchableOpacity style={styles.buttonContainer} onPress={handleGetTomes}>
                 <Text style={styles.buttonText}>
                     {
-                        chaptersVisible ? 'Отобразить главы' : "Скрыть Главы"
+                        chaptersVisible ?  "Скрыть Главы" : 'Отобразить главы'
                     }
                 </Text>
                 </TouchableOpacity>
 
                 {chaptersVisible && <ChapterList navigation={navigation} chapter={chapter} mangaId={manga.id} />}
+
+                <View style={styles.similarMangaContainer}>
+                    <SimilarMangaList navigation={navigation} />
+                </View>
             </>
             ) : (
             <Text>Не найденно</Text>
@@ -77,7 +84,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         padding: 16,
         width: '100%',
-        height: '100%'
     },
     info: {
         flexDirection: 'row',
