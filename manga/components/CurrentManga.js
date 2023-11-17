@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Image, View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { getChapters, getTomes } from '../redux/readingSlice';
+import { getChapters, getTomes, getElseTomes } from '../redux/readingSlice';
 import ChapterList from './ChaptersList';
 
 
 
 const CurrentManga = ({ route, navigation }) => {
     const [chaptersVisible, setChaptersVisible] = useState(false);
+    const [pageNumber, setPageNumber] = useState(1);
     let isMangaReceived = route.params !== undefined;
-    let manga = route.params;
+    const manga = route.params;
     const chapter = useSelector((state) => state.read.currentChapters);
     const similarManga = useSelector((state) => state.manga.similarManga);
     const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const CurrentManga = ({ route, navigation }) => {
         dispatch(getTomes('314'));
         setChaptersVisible(true); 
     };
+    
 
     return (
         <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -56,7 +58,7 @@ const CurrentManga = ({ route, navigation }) => {
                 </Text>
                 </TouchableOpacity>
 
-                {chaptersVisible && <ChapterList navigation={navigation} chapter={chapter} />}
+                {chaptersVisible && <ChapterList navigation={navigation} chapter={chapter} mangaId={manga.id} />}
             </>
             ) : (
             <Text>Не найденно</Text>

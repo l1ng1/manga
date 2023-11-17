@@ -25,6 +25,27 @@ export const getTomes = createAsyncThunk('read/getTomes', async (mangaID) => {
     return data;
 });
 
+export const getElseTomes = createAsyncThunk('read/getElseTomes', async ({ mangaID, pageNumber }) => {
+    console.log(pageNumber);
+    const post_data = {
+        'url': "https://api.remanga.org/api/titles/chapters/?branch_id=" + mangaID + '&page=' + pageNumber
+    };
+
+    const response = await fetch('https://lapse.site/t_api/manga.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: 'bearer '
+        },
+        body: JSON.stringify(post_data),
+    });
+
+    const data = await response.json();
+    console.log(data);
+    return data;
+});
+
+
 export const getChapters = createAsyncThunk('read/getChapters', async (tomID) => {
     const post_data = {
         'url': "https://api.remanga.org/api/titles/chapters/" + tomID + "/"
@@ -69,7 +90,7 @@ export const getImg = createAsyncThunk('read/getImg', async (tom) => {
       console.error('Error:', error.message);
       throw error;
     }
-  });
+});
   
 
 const readingSlice = createSlice({
@@ -78,6 +99,7 @@ const readingSlice = createSlice({
         currentToms: [],
         currentChapters: [],
         currentImg:[],
+        pageNumber: 2,
     },
     reducers: {
         clearCurrentToms: (state) => {
@@ -86,12 +108,30 @@ const readingSlice = createSlice({
         clearCurrentChapters: (state) => {
             state.currentChapters = [];
         },
+        clearPageNumber: (state) => {
+            state.currentChapters = [];
+        },
+        increasePageNumber: (state) => {
+            state.pageNumber += 1;
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(getTomes.fulfilled, (state, action) => {
             if (action.payload) {
                 console.log('getTomes');
                 state.currentToms = action.payload.external_data.content;
+            } else {
+                console.log('Error');
+            }
+        });
+
+        builder.addCase(getElseTomes.fulfilled, (state, action) => {
+            if (action.payload) {
+                console.log('getElseTomes');
+                console.log(action.payload.external_data.content);
+                let contentArray = action.payload.external_data.content;
+                for(let manga of contentArray) state.currentToms.push(manga);
+                console.log(state.currentToms)
             } else {
                 console.log('Error');
             }
@@ -119,5 +159,5 @@ const readingSlice = createSlice({
     }
 });
 
-export const { clearCurrentToms, clearCurrentChapters } = readingSlice.actions;
+export const { clearCurrentToms, clearCurrentChapters, increasePageNumber } = readingSlice.actions;
 export default readingSlice.reducer;

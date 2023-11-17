@@ -88,8 +88,8 @@ const mangaSlice = createSlice({
         builder.addCase(searchManga.fulfilled, (state, action) => {
             if (action.payload) {
                 console.log('searchMangaрмтбитб');
-                console.log(action.payload.external_data.content);
-                state.searchResults = action.payload.external_data.content;
+                console.log(action.payload.external_data);
+                state.searchResults = action.payload.external_data;
                 // console.log(state.searchResults);
             } else {
                 console.log('Error');
@@ -99,8 +99,8 @@ const mangaSlice = createSlice({
         builder.addCase(similarManga.fulfilled, (state, action) => {
             if (action.payload) {
                 console.log('similarManga');
-                console.log(action.payload.external_data.content);
-                state.similarManga = action.payload.external_data.content;
+                console.log(action.payload);
+                // state.similarManga = action.payload.external_data.content;
                 // console.log(state.searchResults);
             } else {
                 console.log('Error');

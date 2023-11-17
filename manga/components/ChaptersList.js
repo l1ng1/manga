@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { getChapters, getTomes } from '../redux/readingSlice';
+import { getChapters, getTomes, getElseTomes, increasePageNumber } from '../redux/readingSlice';
 
-const ChapterList = ({navigation,chapter}) => {
+const ChapterList = ({ navigation, chapter, mangaId }) => {
     const currentToms = useSelector((state) => state.read.currentToms);
+    const pageNumber = useSelector((state) => state.read.pageNumber);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -16,31 +17,48 @@ const ChapterList = ({navigation,chapter}) => {
         dispatch(getChapters('314801'));
     };
 
+    const handleGetElseTomes =  (id, pageNumber) => {
+        console.log(pageNumber)
+        dispatch(getElseTomes({mangaID: '314', pageNumber: pageNumber}));
+        dispatch(increasePageNumber())
+    };
+    
+
     return (
         <View>
-            {currentToms.length !== 0 ? (
-                currentToms.map((tom) => (
+        {currentToms.length !== 0 ? (
+            <>
+            {currentToms.map((tom) => (
                 <TouchableOpacity
-                    key={tom.id}
-                    style={styles.chapterButton}
-                    onPress={() => {
-                        dispatch(getChapters(tom.id));
-                        navigation.navigate('chapter',currentToms);
-                    }}
+                key={tom.id}
+                style={styles.chapterButton}
+                onPress={() => {
+                    dispatch(getChapters(tom.id));
+                    navigation.navigate('chapter', currentToms);
+                }}
                 >
-                    <Text>
+                <Text>
                     <Text style={styles.textBold}>{`Том ${tom.tome}, `}</Text>
                     <Text>{`Глава ${tom.chapter}`}</Text>
                     {tom.name && <Text style={styles.textItalic}>{` - ${tom.name}`}</Text>}
-                    </Text>
+                </Text>
                 </TouchableOpacity>
-                ))
-            ) : (
-                <Text>Не найдено</Text>
-            )}
+            ))}
+            <Button
+                title="Загрузить больше глав"
+                onPress={() => {
+                    handleGetElseTomes(mangaId, pageNumber)
+                }}
+                // Добавьте стили для кнопки по вашему усмотрению
+            />
+            </>
+        ) : (
+            <Text>Не найдено</Text>
+        )}
         </View>
     );
 };
+
 
 const styles = StyleSheet.create({
     chapterButton: {
