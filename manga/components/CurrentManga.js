@@ -37,7 +37,7 @@ const CurrentManga = ({ route, navigation }) => {
             <>
                 <View style={styles.info}>
                 <View style={styles.imageContainer}>
-                    <Image source={{ uri: 'https://remanga.org/' + manga.img.mid }} style={styles.coverImage}  />
+                    <Image source={{ uri: 'https://remanga.org/' + manga.img.low }} style={styles.coverImage}  />
                 </View>
                 <View style={styles.descriptionContainer}>
                     <Text style={styles.title}>{manga.rus_name}</Text>
@@ -87,32 +87,31 @@ const styles = StyleSheet.create({
     info: {
         flexDirection: 'row',
         width: '100%',
-        height: '60%',
-        alignItems: 'flex-start', 
+        height: 500, 
     },
     imageContainer: {
         flex: 4,
         paddingRight: 16,
-        width: '50%',
+        width: '50%'
     },
     descriptionContainer: {
         flex: 6,
     },
     coverImage: {
-        width: '100%', // Чтобы картинка занимала 100% ширины родительского контейнера
-        height: '100%', // Чтобы картинка занимала 100% высоты родительского контейнера
+        width: '80%', 
+        height: '80%', 
         borderRadius: 8,
         resizeMode: 'contain',
     },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#4682B4', // Голубой цвет
-    },
+color: '#4682B4', // Голубой цвет
+            },
     secondaryTitle: {
         fontSize: 20,
-        color: '#4682B4', // Голубой цвет
-    },
+color: '#4682B4', // Голубой цвет
+            },
     description: {
         fontSize: 16,
         marginTop: 4,
