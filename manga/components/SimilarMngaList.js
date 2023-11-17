@@ -53,6 +53,11 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: 'bold',
     },
+    similarMangaTitle: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 20,
+    },
 });
 
 export default SimilarMangaList;
