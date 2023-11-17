@@ -46,7 +46,7 @@ export const getImg = createAsyncThunk('read/getImg',async(tom)=>{
     
     const url = tom.pages[0][0].link;
    
-    let url2 = url.replace('https://img5.reimg.org/','https://reimg2.org');
+    let url2 = url.replace('https://img5.reimg.org/','https://reimg2.org/');
     console.log(url2);
     
     const post_data = {
