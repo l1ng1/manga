@@ -21,8 +21,30 @@ export const getTomes = createAsyncThunk('read/getTomes', async (mangaID) => {
         body: JSON.stringify(post_data),
     });
     const data = await response.json();
+    console.log(data)
     return data;
 });
+
+export const getElseTomes = createAsyncThunk('read/getElseTomes', async ({ mangaID, pageNumber }) => {
+    console.log(pageNumber);
+    const post_data = {
+        'url': "https://api.remanga.org/api/titles/chapters/?branch_id=" + mangaID + '&page=' + pageNumber
+    };
+
+    const response = await fetch('https://lapse.site/t_api/manga.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: 'bearer '
+        },
+        body: JSON.stringify(post_data),
+    });
+
+    const data = await response.json();
+    console.log(data);
+    return data;
+});
+
 
 export const getChapters = createAsyncThunk('read/getChapters', async (tomID) => {
     const post_data = {
@@ -42,31 +64,34 @@ export const getChapters = createAsyncThunk('read/getChapters', async (tomID) =>
 });
 
 
-export const getImg = createAsyncThunk('read/getImg',async(tom)=>{
-    
-    const url = tom.pages[0][0].link;
-   
-    let url2 = url.replace('https://img5.reimg.org/','https://reimg2.org/');
-    console.log(url2);
-    
-    const post_data = {
-        'url':url2
-    }
-
-    console.log('SUCSEC')
-    
-    const response = await fetch('https://lapse.site/t_api/manga.php', {
+export const getImg = createAsyncThunk('read/getImg', async (tom) => {
+    try {
+      const e = tom.pages[0][0].link;
+      let url2 = e.startsWith("https://img5.reimg.org") ? e.replace("https://img5.reimg.org", "https://reimg2.org") : e.replace("reimg.org", "reimg2.org");
+      console.log(url2);
+  
+      const post_data = {
+        'url': url2
+      }
+  
+      console.log('SUCSEC')
+  
+      const response = await fetch('https://lapse.site/t_api/manga.php', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            authorization: 'bearer '
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(post_data),
-    });
-    const data = await response.json();
-    return data;
-
-})
+      });
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error:', error.message);
+      throw error;
+    }
+});
+  
 
 const readingSlice = createSlice({
     name: 'read',
@@ -74,6 +99,7 @@ const readingSlice = createSlice({
         currentToms: [],
         currentChapters: [],
         currentImg:[],
+        pageNumber: 2,
     },
     reducers: {
         clearCurrentToms: (state) => {
@@ -82,12 +108,30 @@ const readingSlice = createSlice({
         clearCurrentChapters: (state) => {
             state.currentChapters = [];
         },
+        clearPageNumber: (state) => {
+            state.currentChapters = [];
+        },
+        increasePageNumber: (state) => {
+            state.pageNumber += 1;
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(getTomes.fulfilled, (state, action) => {
             if (action.payload) {
                 console.log('getTomes');
                 state.currentToms = action.payload.external_data.content;
+            } else {
+                console.log('Error');
+            }
+        });
+
+        builder.addCase(getElseTomes.fulfilled, (state, action) => {
+            if (action.payload) {
+                console.log('getElseTomes');
+                console.log(action.payload.external_data.content);
+                let contentArray = action.payload.external_data.content;
+                for(let manga of contentArray) state.currentToms.push(manga);
+                console.log(state.currentToms)
             } else {
                 console.log('Error');
             }
@@ -115,5 +159,5 @@ const readingSlice = createSlice({
     }
 });
 
-export const { clearCurrentToms, clearCurrentChapters } = readingSlice.actions;
+export const { clearCurrentToms, clearCurrentChapters, increasePageNumber } = readingSlice.actions;
 export default readingSlice.reducer;

@@ -6,7 +6,7 @@ import { clearSearchResults } from '../redux/mangaSlice'; // Добавьте э
 import PopularManga from './PopularComp';
 export default function SearchScreen({ navigation }) {
     const [searchText, setSearchText] = useState('');
-    const searchResults = useSelector((state) => state.manga.searchResults); // Измените находку состояния
+    const searchResults = useSelector((state) => state.manga.searchResults); // Измените находку состояния 
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -14,8 +14,7 @@ export default function SearchScreen({ navigation }) {
     }, [searchResults]); 
 
     const handleSearch = () => {
-        console.log(searchText);
-        // Очистите результаты поиска перед новым поиском
+// Очищаем результаты поиска перед новым поиском
         dispatch(clearSearchResults()); 
         dispatch(searchManga(searchText));
     };
@@ -37,7 +36,7 @@ export default function SearchScreen({ navigation }) {
             </View>
             <View style={styles.contentContainer}>
               
-                <Text>Контейнер для отображения поика!</Text>
+<Text>Контейнер для отображения поика!</Text>
                 <PopularManga data={searchResults} navigation={navigation} ></PopularManga>
             </View>
         </View>
