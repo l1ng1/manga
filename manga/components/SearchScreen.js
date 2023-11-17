@@ -36,7 +36,6 @@ export default function SearchScreen({ navigation }) {
             </View>
             <View style={styles.contentContainer}>
               
-<Text>Контейнер для отображения поика!</Text>
                 <PopularManga data={searchResults} navigation={navigation} ></PopularManga>
             </View>
         </View>
