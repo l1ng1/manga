@@ -21,6 +21,7 @@ export const getTomes = createAsyncThunk('read/getTomes', async (mangaID) => {
         body: JSON.stringify(post_data),
     });
     const data = await response.json();
+    console.log(data)
     return data;
 });
 
@@ -42,31 +43,34 @@ export const getChapters = createAsyncThunk('read/getChapters', async (tomID) =>
 });
 
 
-export const getImg = createAsyncThunk('read/getImg',async(tom)=>{
-    
-    const url = tom.pages[0][0].link;
-   
-    let url2 = url.replace('https://img5.reimg.org/','https://reimg2.org');
-    console.log(url2);
-    
-    const post_data = {
-        'url':url2
-    }
-
-    console.log('SUCSEC')
-    
-    const response = await fetch('https://lapse.site/t_api/manga.php', {
+export const getImg = createAsyncThunk('read/getImg', async (tom) => {
+    try {
+      const e = tom.pages[0][0].link;
+      let url2 = e.startsWith("https://img5.reimg.org") ? e.replace("https://img5.reimg.org", "https://reimg2.org") : e.replace("reimg.org", "reimg2.org");
+      console.log(url2);
+  
+      const post_data = {
+        'url': url2
+      }
+  
+      console.log('SUCSEC')
+  
+      const response = await fetch('https://lapse.site/t_api/manga.php', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            authorization: 'bearer '
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(post_data),
-    });
-    const data = await response.json();
-    return data;
-
-})
+      });
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error:', error.message);
+      throw error;
+    }
+  });
+  
 
 const readingSlice = createSlice({
     name: 'read',

@@ -14,8 +14,7 @@ export default function SearchScreen({ navigation }) {
     }, [searchResults]); 
 
     const handleSearch = () => {
-        console.log(searchText);
-        // Очистите результаты поиска перед новым поиском
+        // Очищаем результаты поиска перед новым поиском
         dispatch(clearSearchResults()); 
         dispatch(searchManga(searchText));
     };

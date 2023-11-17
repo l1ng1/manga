@@ -4,18 +4,24 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getChapters, getTomes } from '../redux/readingSlice';
 import ChapterList from './ChaptersList';
 
+
+
 const CurrentManga = ({ route, navigation }) => {
     const [chaptersVisible, setChaptersVisible] = useState(false);
     let isMangaReceived = route.params !== undefined;
     let manga = route.params;
     const chapter = useSelector((state) => state.read.currentChapters);
+    const similarManga = useSelector((state) => state.manga.similarManga);
     const dispatch = useDispatch();
 
     useEffect(() => {
         console.log(chapter);
     }, [chapter]);
+    useEffect(() => {
+        console.log(similarManga);
+    }, [chapter]);
     
-    const handleGetTomes = () => {
+    const handleGetTomes = (id) => {
         dispatch(getTomes('314'));
         setChaptersVisible(true); 
     };
@@ -43,10 +49,14 @@ const CurrentManga = ({ route, navigation }) => {
                 </View>
 
                 <TouchableOpacity style={styles.buttonContainer} onPress={handleGetTomes}>
-                <Text style={styles.buttonText}>Chapters</Text>
+                <Text style={styles.buttonText}>
+                    {
+                        chaptersVisible ? 'Отобразить главы' : "Скрыть Главы"
+                    }
+                </Text>
                 </TouchableOpacity>
 
-                {chaptersVisible && <ChapterList navigation={navigation} chapter={chapter} />} {/* Отображение глав только если видимость установлена в true */}
+                {chaptersVisible && <ChapterList navigation={navigation} chapter={chapter} />}
             </>
             ) : (
             <Text>Не найденно</Text>
