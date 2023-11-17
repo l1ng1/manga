@@ -40,7 +40,7 @@ export const searchManga = createAsyncThunk('manga/searchManga', async (text) =>
 
 // https://api.remanga.org/api/titles/i-am-a-fulltime-newbie-exclusive/similar/?count=10
 
-export const similarManga = createAsyncThunk('manga/similarManga', async (text) => {
+export const fetchSimilarManga = createAsyncThunk('manga/similarManga', async (text) => {
     const post_data = {
         'url': "https://api.remanga.org/api/titles/" + text + "/similar/?count=10"
     }
@@ -76,7 +76,6 @@ const mangaSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchPopularMangaList.fulfilled, (state, action) => {
             if (action.payload) {
-                // console.log(JSON.parse(action.payload));
                 state.popularManga = action.payload.external_data
             } else {
                 console.log('Error');
@@ -94,7 +93,7 @@ const mangaSlice = createSlice({
             }
         });
     
-        builder.addCase(similarManga.fulfilled, (state, action) => {
+        builder.addCase(fetchSimilarManga.fulfilled, (state, action) => {
             if (action.payload) {
                 console.log('similarManga');
                 console.log(action.payload);

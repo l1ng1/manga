@@ -21,12 +21,10 @@ export const getTomes = createAsyncThunk('read/getTomes', async (mangaID) => {
         body: JSON.stringify(post_data),
     });
     const data = await response.json();
-    console.log(data)
     return data;
 });
 
 export const getElseTomes = createAsyncThunk('read/getElseTomes', async ({ mangaID, pageNumber }) => {
-    console.log(pageNumber);
     const post_data = {
         'url': "https://api.remanga.org/api/titles/chapters/?branch_id=" + mangaID + '&page=' + pageNumber
     };
@@ -41,7 +39,6 @@ export const getElseTomes = createAsyncThunk('read/getElseTomes', async ({ manga
     });
 
     const data = await response.json();
-    console.log(data);
     return data;
 });
 
@@ -50,7 +47,6 @@ export const getChapters = createAsyncThunk('read/getChapters', async (tomID) =>
     const post_data = {
         'url': "https://api.remanga.org/api/titles/chapters/" + tomID + "/"
     }
-    // console.log('startgetChapters');
     const response = await fetch('https://lapse.site/t_api/manga.php', {
         method: 'POST',
         headers: {

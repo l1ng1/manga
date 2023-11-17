@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchManga } from '../redux/mangaSlice'; 
-import { clearSearchResults } from '../redux/mangaSlice'; // Добавьте этот импорт
+import { clearSearchResults } from '../redux/mangaSlice'; 
 import PopularManga from './PopularComp';
+
 export default function SearchScreen({ navigation }) {
     const [searchText, setSearchText] = useState('');
-    const searchResults = useSelector((state) => state.manga.searchResults); // Измените находку состояния 
+    const searchResults = useSelector((state) => state.manga.searchResults); 
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -14,7 +15,7 @@ export default function SearchScreen({ navigation }) {
     }, [searchResults]); 
 
     const handleSearch = () => {
-// Очищаем результаты поиска перед новым поиском
+        // Очищаем результаты поиска перед новым поиском
         dispatch(clearSearchResults()); 
         dispatch(searchManga(searchText));
     };

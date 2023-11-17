@@ -15,12 +15,12 @@ const MangaRead = ({route,navigation}) => {
 
     // src="https://img3.reimg.org/images/350/26163/711315eda7bfbbccb12019779aa034fa.jpg"
 
-    return (
-      <View >
-          <Text>Компонент для чтения(картинки)</Text>
-          <Image source={{ uri: 'https://reimg2.org/images/381/24-99/1_re.jpg' }}   />
-      </View>
-    )
+  return (
+    <View >
+      <Text>Компонент для чтения(картинки)</Text>
+      <Image source={{ uri: 'https://reimg2.org/images/381/24-99/1_re.jpg' }}   />
+    </View>
+  )
 };
 
 

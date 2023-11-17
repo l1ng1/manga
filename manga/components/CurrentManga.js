@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Image, View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { getChapters, getTomes, getElseTomes } from '../redux/readingSlice';
+import {  getTomes } from '../redux/readingSlice';
 import ChapterList from './ChaptersList';
 import SimilarMangaList from './SimilarMngaList';
-
-
 
 const CurrentManga = ({ route, navigation }) => {
     const [chaptersVisible, setChaptersVisible] = useState(false);
@@ -20,9 +18,8 @@ const CurrentManga = ({ route, navigation }) => {
     }, [chapter]);
 
     useEffect(() => {
-        
         console.log(similarManga);
-    }, [chapter]);
+    }, [similarManga]);
     
     const handleGetTomes = (id) => {
         dispatch(getTomes('314'));
@@ -87,7 +84,7 @@ const styles = StyleSheet.create({
     info: {
         flexDirection: 'row',
         width: '100%',
-        height: 500, 
+        height: 400, 
     },
     imageContainer: {
         flex: 4,
@@ -106,12 +103,12 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontWeight: 'bold',
-color: '#4682B4', // Голубой цвет
-            },
+        color: '#4682B4', 
+    },
     secondaryTitle: {
         fontSize: 20,
-color: '#4682B4', // Голубой цвет
-            },
+        color: '#4682B4',
+    },
     description: {
         fontSize: 16,
         marginTop: 4,

@@ -1,23 +1,33 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { fetchSimilarManga, clearSimilarManga } from '../redux/mangaSlice';
+
 
 
 const SimilarMangaList = ({ navigation }) => {
     const similarManga = useSelector((state) => state.manga.similarManga);
+    const dispatch = useDispatch();
+
+    const handleSimilar = () => {
+        dispatch(clearSimilarManga()); 
+    };
     
     const renderItem = ({ item }) => (
-      <TouchableOpacity onPress={() => navigation.navigate('Читать', item.title)}>
-        <View style={{ margin: 10 }}>
-          <Image
-            source={{ uri: 'https://remanga.org/' + item.title.img.low }}
-            style={{ width: 100, height: 150 }}
-          />
-          <Text>{item.title.main_name}</Text>
-          <Text>{item.title.en_name}</Text>
-          <Text>Rating: {item.avg_rating}</Text>
-        </View>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+            navigation.navigate('Читать', item.title);
+            handleSimilar(); 
+        }}>
+            <View style={{ margin: 10 }}>
+            <Image
+                source={{ uri: 'https://remanga.org/' + item.title.img.low }}
+                style={{ width: 100, height: 150 }}
+            />
+            <Text>{item.title.main_name}</Text>
+            <Text>{item.title.en_name}</Text>
+            <Text>Rating: {item.avg_rating}</Text>
+            </View>
+        </TouchableOpacity>
     );
 
     return (
